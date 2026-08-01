@@ -25,7 +25,9 @@ title: Zoila Aurora Cáceres (1872-1958)
 tagline: El álbum personal
 # description appears in meta tags and other locations
 # this description might appear in search result lists, keep around 160 characters max
-description: "CollectionBuilder-GH is a template for creating small digital collection exhibits on GitHub Pages designed for teaching digital library skills"
+description: "This exhibit presents the personal album of Zoila Aurora Cáceres (1872–1958), 
+Peruvian feminist writer and activist, digitized and catalogued from letters, press clippings, photographs, and ephemera spanning 1892–1910. 
+Explore the collection by browsing individual items, searching by document type or location, or tracing its timeline."
 # creator of the digital collection, to appear in meta tags; we typically use our GitHub usernames but feel free to just use your name
 author: CollectionBuilder
 
