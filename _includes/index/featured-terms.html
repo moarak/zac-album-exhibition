@@ -38,10 +38,12 @@
 {%- assign items = site.data[site.metadata] | where_exp: 'item', 'item.objectid'| where_exp: 'item','item.parentid == nil' -%}
 {% endif %}
 {% assign rawTerms = items | map: termsField | join: ";" | split: ";" %}
-{% capture terms %}{% for t in rawTerms %}{% if t != "" and t != " " %}{{ t | strip | downcase }};{% endif %}{% endfor %}{% endcapture %}
-{% assign terms = terms | split: ";" %}
+{% capture cleanTermsStr %}{% for t in rawTerms %}{% if t != "" and t != " " %}{{ t | strip }};{% endif %}{% endfor %}{% endcapture %}
+{% assign cleanTerms = cleanTermsStr | split: ";" %}
+{% capture termsStr %}{% for t in cleanTerms %}{{ t | downcase }};{% endfor %}{% endcapture %}
+{% assign terms = termsStr | split: ";" %}
 {% assign uniqueTerms = terms | uniq | sort %}
-{% capture termsCount %}{% for unique in uniqueTerms %}{% assign count = terms | where_exp: 'item', 'item == unique' | size %}{{ count | prepend: '0000' | slice: -4, 4 }}||{{ unique | capitalize }}{% unless forloop.last %};{% endunless %}{% endfor %}{% endcapture %}
+{% capture termsCount %}{% for unique in uniqueTerms %}{% assign count = terms | where_exp: 'item', 'item == unique' | size %}{% assign original = cleanTerms | where_exp: 'item', 'item | downcase == unique' | first %}{{ count | prepend: '0000' | slice: -4, 4 }}||{{ original }}{% unless forloop.last %};{% endunless %}{% endfor %}{% endcapture %}
 {% assign termsCount = termsCount | split: ";" | sort | reverse %}
 {% capture topTerms %}
 {% for i in termsCount limit: termsMax %}{{ i | split: "||" | last }};{% endfor %}{% endcapture %}
